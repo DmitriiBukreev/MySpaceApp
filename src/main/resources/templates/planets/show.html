@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Planet</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1 id="page-name">Planet details</h1>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<p th:text = "${planet.getName()}">PlanetName</p>
+<p th:text = "${planet.getMaster().getName()}">MasterName</p>
+
+<form th:method="DELETE" th:action="@{/gui/planets/{id}(id=${planet.getId()})}" th:object="${planet}">
+    <input type="submit" value="Delete!">
+</form>
+
+<form th:method="POST" th:action="@{/gui/planets/{id}/assign(id=${planet.getId()})}" th:object="${planet}">
+    <label for="master_name">Enter master's name</label>
+    <input type="text" id="master_name" name="master_name"/>
+    <input type="hidden" id="name" th:field="*{name}">
+    <input type="submit" value="Assign!">
+</form>
+
+</body>
+</html>

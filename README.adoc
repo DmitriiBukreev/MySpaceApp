@@ -1,0 +1,23 @@
+== How to run the application ==
+
+The application is started using maven wrapper.
+To run the application start it up
+
+On Windows: ./mvnw.cmd spring-boot:run
+
+On Linux or MacOs ./mvnw spring-boot:run
+
+//TODO Write how to use the GUI
+//TODO Describe starter data what is in data.sql
+
+//TODO How to access H2 console, URL, login, password
+== Application description ==
+
+//Write about each of the layers and of testing of each layer
+
+//TODO Include this in your README
+//The service layerer abstraction is used to provide two presentation layers.
+//The first presentatation layer is an api (controller.api package) the second one
+//is a web Thymeleaf-based GUI (controller.gui) package.
+
+//TODO Include description of test data

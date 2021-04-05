@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>All planets</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<h1 id="page-name">Planets</h1>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<p>Planet list:</p>
+<ol>
+    <a th:href="@{/gui/planets/{id}(id=${planet.getId()})}" th:each="planet : ${planets}"><li  th:text="${planet.getName()}">Planet Name</li></a>
+</ol>
+
+<a th:href="@{/gui/planets/new}"><button>Create new planet</button></a>
+</body>
+</html>

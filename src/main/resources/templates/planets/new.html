@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1 id="page-name">Add Planet</h1>
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<form th:method="POST" th:action="@{/gui/planets/create}" th:object="${planet}">
+    <label for="name">Enter planet name</label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/>
+    <input type="submit" value="Create!">
+</form>
+
+</body>
+</html>

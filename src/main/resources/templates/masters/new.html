@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1 id="page-name">Create new master</h1>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<form th:method="POST" th:action="@{/gui/masters/create}" th:object="${master}">
+    <label for="name">Enter master's name</label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/>
+    <label for="age">Enter master's age</label>
+    <input type="number" th:field="*{age}" id="age"/>
+    <br/>
+    <input type="submit" value="Create!">
+</form>
+
+</body>
+</html>

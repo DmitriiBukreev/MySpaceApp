@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    initialization-mode: never
+#server:
+#  servlet:
+#    context-path=/api/v1:
