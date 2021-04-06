@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -39,14 +41,6 @@ public class PlanetControllerGui {
         return "planets/new";
     }
 
-//    @PostMapping("/assign")
-//    public String assignPlanet(@ModelAttribute("planet") Planet planet, @ModelAttribute("master") Master master) {
-//        mySpaceService.assignMasterToPlanet(master.getName(), planet.getName());
-//        //model.addAttribute("planet", new Planet());
-//        //Add code to assign planet
-//        return "redirect:/gui/planets";
-//    }
-
     @PostMapping("/create")
     public String newPlanet(@ModelAttribute("planet") Planet planet ){
         mySpaceService.addPlanetByName(planet.getName());
@@ -64,5 +58,4 @@ public class PlanetControllerGui {
         mySpaceService.assignMasterToPlanet(masterName, planetName);
         return "redirect:/gui/planets";
     }
-
 }

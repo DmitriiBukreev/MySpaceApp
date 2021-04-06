@@ -1,6 +1,7 @@
 package com.popovich.myspace.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -20,7 +21,10 @@ public class Master {
     @GeneratedValue
     private Long id;
 
+    @NotNull
     private String name;
+
+    @NotNull
     private Integer age;
 
     @OneToMany(mappedBy = "master")

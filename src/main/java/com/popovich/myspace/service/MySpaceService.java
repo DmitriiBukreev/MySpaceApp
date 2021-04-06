@@ -4,13 +4,14 @@ import com.popovich.myspace.entity.Master;
 import com.popovich.myspace.entity.Planet;
 import com.popovich.myspace.repository.MasterRepository;
 import com.popovich.myspace.repository.PlanetRepository;
+import com.popovich.myspace.service.exception.InvalidAgeException;
+import com.popovich.myspace.service.exception.InvalidNameException;
 import com.popovich.myspace.service.exception.NameIsAlreadyTakenException;
-import com.popovich.myspace.service.exception.NoSuchObjectException;
+import com.popovich.myspace.service.exception.NoSuchMasterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 
 @Service
@@ -18,8 +19,6 @@ public class MySpaceService {
 
     private final MasterRepository masterRepository;
     private final PlanetRepository planetRepository;
-
-    private static final Pattern namingPattern = Pattern.compile(namingRegexp());
 
     @Autowired
     public MySpaceService(MasterRepository masterRepository, PlanetRepository planetRepository){
@@ -30,7 +29,7 @@ public class MySpaceService {
     public void addPlanetByName(String name) {
         var planetOptional = planetRepository.findByName(name);
         if (!name.matches(namingRegexp())){
-            throw new IllegalArgumentException();
+            throw new InvalidNameException();
         }
         if (planetOptional.isPresent()) {
             throw new NameIsAlreadyTakenException();
@@ -40,16 +39,19 @@ public class MySpaceService {
 
     public void deletePlanet(Planet planet) {
         var planetOptional = planetRepository.findByName(planet.getName());
-        if (planetOptional.isPresent()) {
-            throw new NoSuchObjectException();
+        if (planetOptional.isEmpty()) {
+            throw new IllegalArgumentException();
         }
         planetRepository.delete(planet);
     }
 
     public void addMaster(String name, Integer age) {
 
-        if (!name.matches(namingRegexp()) || age < 1){
-            throw new IllegalArgumentException();
+        if (age < 1){
+            throw new InvalidAgeException();
+        }
+        if (!name.matches(namingRegexp())){
+            throw new InvalidNameException();
         }
         var masterOptional = masterRepository.findByName(name);
 
@@ -65,7 +67,7 @@ public class MySpaceService {
         var masterOptional = masterRepository.findByName(masterName);
         var planetOptional = planetRepository.findByName(planetName);
         if (masterOptional.isEmpty() || planetOptional.isEmpty()) {
-            throw new NoSuchObjectException();
+            throw new NoSuchMasterException();
         }
         var master = masterOptional.get();
         var planet = planetOptional.get();
@@ -76,7 +78,7 @@ public class MySpaceService {
     public void deletePlanetByNameObject(Planet planet) {
         var planetOptional = planetRepository.findByName(planet.getName());
         if (planetOptional.isEmpty()) {
-            throw new NoSuchObjectException();
+            throw new IllegalArgumentException();
         }
         planetRepository.deleteByName(planet.getName());
     }
@@ -84,7 +86,7 @@ public class MySpaceService {
     public void deletePlanetByName(String name) {
         var planetOptional = planetRepository.findByName(name);
         if (planetOptional.isEmpty()) {
-            throw new NoSuchObjectException();
+            throw new IllegalArgumentException();
         }
         planetRepository.deleteByName(name);
     }
