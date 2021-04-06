@@ -6,19 +6,20 @@ import com.popovich.myspace.repository.MasterRepository;
 import com.popovich.myspace.repository.PlanetRepository;
 import com.popovich.myspace.service.exception.NameIsAlreadyTakenException;
 import com.popovich.myspace.service.exception.NoSuchObjectException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 
 @Service
-@Slf4j
 public class MySpaceService {
 
     private final MasterRepository masterRepository;
     private final PlanetRepository planetRepository;
+
+    private static final Pattern namingPattern = Pattern.compile(namingRegexp());
 
     @Autowired
     public MySpaceService(MasterRepository masterRepository, PlanetRepository planetRepository){
@@ -28,6 +29,9 @@ public class MySpaceService {
 
     public void addPlanetByName(String name) {
         var planetOptional = planetRepository.findByName(name);
+        if (!name.matches(namingRegexp())){
+            throw new IllegalArgumentException();
+        }
         if (planetOptional.isPresent()) {
             throw new NameIsAlreadyTakenException();
         }
@@ -44,6 +48,9 @@ public class MySpaceService {
 
     public void addMaster(String name, Integer age) {
 
+        if (!name.matches(namingRegexp()) || age < 1){
+            throw new IllegalArgumentException();
+        }
         var masterOptional = masterRepository.findByName(name);
 
         if (masterOptional.isPresent()) {
@@ -103,5 +110,9 @@ public class MySpaceService {
     }
     public Master getMasterById(Long id){
         return masterRepository.findById(id).get();
+    }
+
+    private static String namingRegexp() {
+        return "\\p{L}+\\d*";
     }
 }

@@ -11,7 +11,15 @@ spring:
     hiddenmethod:
       filter:
         enabled: true
-  thymeleaf: # Thymeleaf
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration
+
+  server:
+    error:
+      whitelabel:
+        enabled=false:
+
+    thymeleaf: # Thymeleaf
     cache: false
     mode: HTML
     encoding: UTF-8
