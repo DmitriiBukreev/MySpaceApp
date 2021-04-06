@@ -11,7 +11,7 @@
 
 <p th:text = "${planet.getName()}">PlanetName</p>
 <p>Owner of the planet:</p>
-<p th:if = "${planet.getMaster()}" th:text = "${planet.getMaster().getName()}">MasterName</p>
+<p  th:if = "${planet.getMaster()}" th:text = "${planet.getMaster().getName()}">MasterName</p>
 
 <form th:method="DELETE" th:action="@{/gui/planets/{id}(id=${planet.getId()})}" th:object="${planet}">
     <input type="submit" value="Delete!">
@@ -24,8 +24,5 @@
     <input type="submit" value="Assign!">
 </form>
 
-<ul>
-    <li th:each="err : ${#fields.errors('*')}"  />
-</ul>
 </body>
 </html>

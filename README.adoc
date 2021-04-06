@@ -12,12 +12,16 @@ On Linux or MacOs ./mvnw spring-boot:run
 
 //TODO How to access H2 console, URL, login, password
 == Application description ==
+The service layerer abstraction is used to provide two presentation layers.
+The first presentatation layer is an api (controller.api package), the second one
+is a web Thymeleaf-based GUI (controller.gui package).
 
+*) How to use Gui
 //Write about each of the layers and of testing of each layer
 
 //TODO Include this in your README
-//The service layerer abstraction is used to provide two presentation layers.
-//The first presentatation layer is an api (controller.api package) the second one
-//is a web Thymeleaf-based GUI (controller.gui) package.
+The service layerer abstraction is used to provide two presentation layers.
+The first presentatation layer is an api (controller.api package) the second one
+is a web Thymeleaf-based GUI (controller.gui) package.
 
 //TODO Include description of test data

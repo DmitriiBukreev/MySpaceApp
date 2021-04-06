@@ -61,7 +61,6 @@ public class MySpaceService {
         masterRepository.save(new Master(name, age));
     }
 
-
     public void assignMasterToPlanet(String masterName, String planetName) {
 
         var masterOptional = masterRepository.findByName(masterName);
@@ -110,6 +109,7 @@ public class MySpaceService {
     public List <Master> getAllMasters() {
         return masterRepository.findAll();
     }
+
     public Master getMasterById(Long id){
         return masterRepository.findById(id).get();
     }

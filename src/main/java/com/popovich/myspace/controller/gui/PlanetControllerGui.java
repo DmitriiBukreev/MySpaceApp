@@ -1,14 +1,11 @@
 package com.popovich.myspace.controller.gui;
 
-import com.popovich.myspace.entity.Master;
 import com.popovich.myspace.entity.Planet;
 import com.popovich.myspace.service.MySpaceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -16,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("gui/planets")
 public class PlanetControllerGui {
 
-    //TODO Nice ordering of method arguments
     private final MySpaceService mySpaceService;
 
     @Autowired

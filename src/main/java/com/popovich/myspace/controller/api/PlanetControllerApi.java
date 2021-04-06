@@ -1,6 +1,5 @@
 package com.popovich.myspace.controller.api;
 
-import com.popovich.myspace.entity.Planet;
 import com.popovich.myspace.service.MySpaceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
