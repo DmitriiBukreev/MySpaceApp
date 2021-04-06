@@ -5,23 +5,41 @@ To run the application start it up
 
 On Windows: ./mvnw.cmd spring-boot:run
 
-On Linux or MacOs ./mvnw spring-boot:run
+On Linux or MacOs: ./mvnw spring-boot:run
 
-//TODO Write how to use the GUI
-//TODO Describe starter data what is in data.sql
-
-//TODO How to access H2 console, URL, login, password
 == Application description ==
-The service layerer abstraction is used to provide two presentation layers.
-The first presentatation layer is an api (controller.api package), the second one
+The service layer abstraction is used to provide two presentation layers.
+The first presentation layer is an api (controller.api package), the second one
 is a web Thymeleaf-based GUI (controller.gui package).
 
-*) How to use Gui
-//Write about each of the layers and of testing of each layer
+Database operations performed with Hibernate.
+    *Address of console http://localhost:8080/h2-console/
+    *Access login "sa" without password
 
-//TODO Include this in your README
-The service layerer abstraction is used to provide two presentation layers.
-The first presentatation layer is an api (controller.api package) the second one
-is a web Thymeleaf-based GUI (controller.gui) package.
+Application uses Thymeleaf templates.
 
-//TODO Include description of test data
+All layers tested with Junit and Mockito.
+
+Front-end part tested with Selenium.
+    *Using Firefox driver
+
+There is starter data in data.sql
+    *two planets
+    *one master owning planet
+    *one master without planet
+
+== How to use GUI ==
+There are masters list and masters operation menu by the address http://localhost:8080/gui/masters
+There are planets list and planets operation menu by the address http://localhost:8080/gui/planets
+GUI uses navigation layout.
+GUI can handle incorrect inputs
+   *Two masters with similar names can't exist
+   *Two planets with similar names can't exist
+   *Names must begin with letter
+
+
+
+
+
+
+
