@@ -10,7 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 
@@ -58,37 +57,51 @@ public class MySpaceService {
 
         var masterOptional = masterRepository.findByName(masterName);
         var planetOptional = planetRepository.findByName(planetName);
-
+        if (masterOptional.isEmpty() || planetOptional.isEmpty()) {
+            throw new NoSuchObjectException();
+        }
         var master = masterOptional.get();
         var planet = planetOptional.get();
         planet.setMaster(master);
         planetRepository.save(planet);
-        log.info("Planet " + planetName + " has been assigned to " + masterName);
     }
 
     public void deletePlanetByNameObject(Planet planet) {
+        var planetOptional = planetRepository.findByName(planet.getName());
+        if (planetOptional.isEmpty()) {
+            throw new NoSuchObjectException();
+        }
         planetRepository.deleteByName(planet.getName());
     }
 
-    public void deletePlanetByName(String name) {planetRepository.deleteByName(name);}
+    public void deletePlanetByName(String name) {
+        var planetOptional = planetRepository.findByName(name);
+        if (planetOptional.isEmpty()) {
+            throw new NoSuchObjectException();
+        }
+        planetRepository.deleteByName(name);
+    }
 
-    public List<Master> findAllSlackerMasters(){
+    public List<Master> findAllSlackerMasters() {
         return masterRepository.findByPlanetsIsNull();
     }
 
-    public List<Master> findTopTenYoungMasters(){
+    public List<Master> findTopTenYoungMasters() {
         return masterRepository.findTop10ByOrderByAgeAsc();
     }
 
-    public List <Planet> getAllPlanets(){
+    public List <Planet> getAllPlanets() {
         return planetRepository.findAll();
     }
 
-    public Planet getPlanetById(Long id){
+    public Planet getPlanetById(Long id) {
         return planetRepository.findById(id).get();
     }
 
-    public List <Master> getAllMasters(){
+    public List <Master> getAllMasters() {
         return masterRepository.findAll();
+    }
+    public Master getMasterById(Long id){
+        return masterRepository.findById(id).get();
     }
 }

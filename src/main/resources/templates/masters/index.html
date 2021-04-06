@@ -11,8 +11,8 @@
 
 <p>Master list:</p>
 <ol>
-    <a th:each="master : ${masters}">
-        <li th:text="${master.getName() +' '+ master.getAge()}">CoolMaster 9999</li>
+    <a th:href="@{/gui/masters/{id}(id=${master.getId()})}" th:each="master : ${masters}">
+        <li th:text="${master.getName()}">CoolMaster 9999</li>
     </a>
 </ol>
 <br/>

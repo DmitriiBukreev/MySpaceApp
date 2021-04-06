@@ -10,7 +10,8 @@
 <div th:replace="fragments/navbar :: navbar"></div>
 
 <p th:text = "${planet.getName()}">PlanetName</p>
-<p th:text = "${planet.getMaster().getName()}">MasterName</p>
+<p>Owner of the planet:</p>
+<p th:if = "${planet.getMaster()}" th:text = "${planet.getMaster().getName()}">MasterName</p>
 
 <form th:method="DELETE" th:action="@{/gui/planets/{id}(id=${planet.getId()})}" th:object="${planet}">
     <input type="submit" value="Delete!">

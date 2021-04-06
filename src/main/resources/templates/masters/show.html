@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Planet</title>
+    <link th:href="@{/css/styles.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1 id="page-name">Master details</h1>
+<div th:replace="fragments/navbar :: navbar"></div>
+<p>Name:</p>
+<p th:text = "${master.getName()}">Planet Name</p>
+<p>Age:</p>
+<p th:text = "${master.getAge()}">Planet Age</p>
+<p>Planets:</p>
+<ol>
+    <a th:href="@{/gui/planets/{id}(id=${planet.getId()})}" th:each="planet : ${master.getPlanets()}">
+        <li th:text="${planet.getName()}">Planet</li>
+    </a>
+</ol>
+
+
+</body>
+</html>

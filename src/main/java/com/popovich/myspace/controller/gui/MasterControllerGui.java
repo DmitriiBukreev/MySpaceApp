@@ -6,10 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @Controller
@@ -33,6 +30,11 @@ public class MasterControllerGui {
     public String createMaster(@ModelAttribute("master") Master master){
         mySpaceService.addMaster(master.getName(),master.getAge());
         return "redirect:/gui/masters";
+    }
+    @GetMapping("/{id}")
+    public String showMaster(@PathVariable("id") Long id, Model model){
+        model.addAttribute("master", mySpaceService.getMasterById(id));
+        return "masters/show";
     }
 
     @GetMapping("/slackers")
